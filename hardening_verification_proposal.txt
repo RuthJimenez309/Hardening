@@ -1,0 +1,42 @@
+﻿===============================================================================
+REPORTE TÉCNICO: AUDITORÍA DE INFRAESTRUCTURA Y VERIFICACIÓN DE HARDENING
+PROYECTO: WA_Enterprise_DFIR_Audit_Project - DÍA 26
+===============================================================================
+
+1. ANÁLISIS DE BRECHA DE RIESGOS DE TI (ANTES VS. DESPUÉS)
+-------------------------------------------------------------------------------
+* VECTOR DE ATAQUE 1: Ejecución de scripts maliciosos vía PowerShell corporativo.
+  - ESTADO ANTES: Crítico. Execution Policy permisiva. Versión v2 activa sin logs.
+  - ESTADO DESPUÉS: Mitigado. Bloques de comandos auditados y transcritos a disco.
+
+* VECTOR DE ATAQUE 2: Exfiltración de datos hacia el servidor C2 (185.220.101.5).
+  - ESTADO ANTES: Crítico. Tráfico saliente permitido sin inspección perimetral.
+  - ESTADO DESPUÉS: Mitigado. Aislamiento completo de red mediante enrutamiento nulo.
+
+* VECTOR DE ATAQUE 3: Vulnerabilidad ante denegación de servicio (DDoS Syn Flood).
+  - ESTADO ANTES: Alto. Pila TCP/IP con valores por defecto del sistema operativo.
+  - ESTADO DESPUÉS: Mitigado. Hardening de registros TCP/IP para descarte de paquetes.
+
+
+2. PRUEBA DE CONCEPTO (PoC) DE EFICACIA
+-------------------------------------------------------------------------------
+Los registros de auditoría local confirman que al invocar conexiones salientes
+hacia la infraestructura del adversario, el host intercepta el tráfico y genera
+un descarte inmediato (Timeout / Waiting for response), impidiendo el canal de fuga.
+
+
+3. PROPUESTA TÉCNICA Y ECONÓMICA DE DISEÑO PERIMETRAL (NGFW / ANTI-DDOS)
+-------------------------------------------------------------------------------
+Para reemplazar las mitigaciones locales provisionales por una arquitectura
+corporativa de alta disponibilidad, se dimensiona el siguiente despliegue:
+
+* Componente 1: Next-Generation Firewall (NGFW) - Fortinet FortiGate 100F
+  - Función: Inspección profunda de paquetes (DPI), IPS y filtrado de contenido.
+  - Costo estimado anual (Soporte Enterprise 24/7): $4,500 USD
+
+* Componente 2: Protección perimetral Anti-DDoS - Cloudflare Enterprise Edge
+  - Función: Mitigación volumétrica en la nube antes de impactar el enlace local.
+  - Costo estimado anual: $3,600 USD
+
+TOTAL INVERSIÓN PROYECTADA: $8,100 USD
+===============================================================================

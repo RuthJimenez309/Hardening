@@ -1,0 +1,2 @@
+﻿[INFO] 2026-10-23 21:45:45 - Entorno inicializado correctamente para el proyecto de Hardening.
+[INFO] 2026-10-23 21:48:05 - Bloque de transcripción y auditoría de PowerShell aplicado sin errores.
